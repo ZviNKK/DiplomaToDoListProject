@@ -1,26 +1,101 @@
 plugins {
+
+	id 'org.springframework.boot' version '2.7.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	id 'org.springframework.boot' version '3.0.5'
-	id 'io.spring.dependency-management' version '1.1.0'
+	id 'jacoco'
+	id "org.sonarqube" version "3.4.0.2513"
 }
 
-group = 'com.diploma'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+group = serviceProject
+version = version
+sourceCompatibility = javaVersionCompatibility
+
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.flywaydb:flyway-core'
-	runtimeOnly 'org.postgresql:postgresql'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation(
+			'org.springframework.boot:spring-boot-starter-web',
+			'org.springframework.boot:spring-boot-starter-actuator',
+			'org.springframework.boot:spring-boot-starter-data-jpa',
+			'org.springdoc:springdoc-openapi-ui:1.6.7',
+			'ch.qos.logback:logback-access:1.2.11',
+			'io.micrometer:micrometer-registry-prometheus',
+			'junit:junit:4.13.1',
+			'org.postgresql:postgresql',
+			'org.flywaydb:flyway-core',
+			'org.springframework.boot:spring-boot-starter-validation',
+			"org.zalando:logbook-spring-boot-starter:$logbookStarterVersion",
+			"net.logstash.logback:logstash-logback-encoder:7.0.1",
+			'org.springframework.cloud:spring-cloud-starter-sleuth',
+			"org.springframework.cloud:spring-cloud-sleuth-zipkin:$springCloudSleuthZipkinVersion",
+			'org.mapstruct:mapstruct:1.5.3.Final'
+	)
+
+	annotationProcessor(
+			'org.projectlombok:lombok:1.18.22',
+			'org.mapstruct:mapstruct-processor:1.5.3.Final'
+	)
+	compileOnly(
+			'org.projectlombok:lombok:1.18.22'
+	)
+
+	testImplementation(
+			'org.springframework.boot:spring-boot-starter-test',
+			"io.rest-assured:rest-assured:$restAssuredVersion",
+			"io.rest-assured:json-path:$restAssuredVersion",
+			"io.rest-assured:xml-path:$restAssuredVersion",
+			'org.assertj:assertj-core:3.23.1',
+			"org.testcontainers:testcontainers:$tcVersion",
+			"org.testcontainers:postgresql:$tcVersion",
+			"org.testcontainers:junit-jupiter:$tcVersion",
+			"org.springframework.cloud:spring-cloud-contract-wiremock:$springCloudWiremockVersion",
+			"io.github.classgraph:classgraph:4.8.139"
+
+	)
+}
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:$springCloudVersion"
+	}
 }
 
-tasks.named('test') {
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}
+test.finalizedBy jacocoTestReport
+jar {
+	enabled = false
+}
+
+test {
 	useJUnitPlatform()
+}
+
+sonarqube {
+	properties {
+		property "sonar.projectName", "todolist"
+		property "sonar.projectKey", "todolist"
+	}
 }
