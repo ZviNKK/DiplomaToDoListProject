@@ -1,9 +1,6 @@
 package com.diploma.todolist.service.task;
 
-import com.diploma.todolist.service.task.dto.CreateTaskInputDTO;
-import com.diploma.todolist.service.task.dto.DeleteTaskOutputDTO;
-import com.diploma.todolist.service.task.dto.TaskOutputDTO;
-import com.diploma.todolist.service.task.dto.UpdateTaskInputDTO;
+import com.diploma.todolist.service.task.dto.*;
 
 public interface TaskService {
     TaskOutputDTO createTask(CreateTaskInputDTO createTaskInputDTO);
@@ -11,4 +8,8 @@ public interface TaskService {
     TaskOutputDTO updateTask(Long taskId, UpdateTaskInputDTO updateTaskInputDTO);
 
     DeleteTaskOutputDTO deleteTask(Long taskId);
+
+    TaskOutputDTO getTaskById(Long taskId);
+
+    UserTasksOutputDTO getTasksByUserId(Long userId);
 }

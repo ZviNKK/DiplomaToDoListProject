@@ -1,10 +1,7 @@
 package com.diploma.todolist.adaptor.api;
 
 import com.diploma.todolist.service.task.TaskService;
-import com.diploma.todolist.service.task.dto.CreateTaskInputDTO;
-import com.diploma.todolist.service.task.dto.DeleteTaskOutputDTO;
-import com.diploma.todolist.service.task.dto.TaskOutputDTO;
-import com.diploma.todolist.service.task.dto.UpdateTaskInputDTO;
+import com.diploma.todolist.service.task.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,5 +28,15 @@ public class TaskController {
     @DeleteMapping("/{taskId}")
     DeleteTaskOutputDTO deleteTask(@PathVariable Long taskId) {
         return service.deleteTask(taskId);
+    }
+
+    @GetMapping("/{taskId}")
+    TaskOutputDTO getTaskById(@PathVariable Long taskId) {
+        return service.getTaskById(taskId);
+    }
+
+    @GetMapping
+    UserTasksOutputDTO getTasksByUserId(@RequestParam Long userId) {
+        return service.getTasksByUserId(userId);
     }
 }

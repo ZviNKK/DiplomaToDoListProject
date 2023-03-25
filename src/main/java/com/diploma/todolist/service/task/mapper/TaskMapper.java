@@ -3,8 +3,9 @@ package com.diploma.todolist.service.task.mapper;
 import com.diploma.todolist.adaptor.persistence.domain.Task;
 import com.diploma.todolist.service.task.dto.CreateTaskInputDTO;
 import com.diploma.todolist.service.task.dto.TaskOutputDTO;
-import com.diploma.todolist.service.task.dto.UpdateTaskInputDTO;
 import org.mapstruct.Mapper;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 
@@ -13,5 +14,5 @@ public interface TaskMapper {
 
     TaskOutputDTO toOutputTask(Task task);
 
-    Task toTask(UpdateTaskInputDTO updateTaskInputDTO);
+    List<TaskOutputDTO> toOutputTasksList(List<Task> tasks);
 }
