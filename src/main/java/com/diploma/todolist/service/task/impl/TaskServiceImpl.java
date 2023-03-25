@@ -2,6 +2,7 @@ package com.diploma.todolist.service.task.impl;
 
 import com.diploma.todolist.adaptor.persistence.TaskRepository;
 import com.diploma.todolist.adaptor.persistence.UserRepository;
+import com.diploma.todolist.adaptor.persistence.domain.Task;
 import com.diploma.todolist.service.exceptions.error_code.not_found.TaskNotFoundException;
 import com.diploma.todolist.service.exceptions.error_code.not_found.UserNotFoundException;
 import com.diploma.todolist.service.task.TaskService;
@@ -10,6 +11,8 @@ import com.diploma.todolist.service.task.mapper.TaskMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.Comparator;
 
 @Service
 @Slf4j
@@ -40,8 +43,9 @@ public class TaskServiceImpl implements TaskService {
             throw new TaskNotFoundException();
         }
         task.get().setTitle(updateTaskInputDTO.getTitle());
-        taskRepository.save(task.get());
-        return mapper.toOutputTask(task.get());
+        task.get().setCompleted(updateTaskInputDTO.isCompleted());
+        Task newtask = taskRepository.save(task.get());
+        return mapper.toOutputTask(newtask);
     }
 
     @Override
@@ -69,6 +73,8 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public UserTasksOutputDTO getTasksByUserId(Long userId) {
         final var tasks = taskRepository.findAllByUserId(userId);
+        tasks.sort(Comparator.comparing(Task::isCompleted));
+
         return new UserTasksOutputDTO(mapper.toOutputTasksList(tasks));
     }
 }

@@ -19,7 +19,8 @@ public class Task {
 
     @Column(name = "title")
     private String title;
-
+    @Column(name = "is_completed")
+    private boolean isCompleted;
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

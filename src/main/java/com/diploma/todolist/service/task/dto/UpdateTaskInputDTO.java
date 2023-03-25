@@ -14,4 +14,5 @@ import javax.validation.constraints.NotBlank;
 public class UpdateTaskInputDTO {
     @NotBlank
     private String title;
+    private boolean isCompleted = false;
 }

@@ -12,6 +12,5 @@ import lombok.Setter;
 public class AuthorisationOutputDTO {
     private Long id;
     private String email;
-    private String password;
     private String phone;
 }

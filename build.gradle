@@ -38,18 +38,18 @@ dependencies {
 			'org.springframework.boot:spring-boot-starter-actuator',
 			'org.springframework.boot:spring-boot-starter-data-jpa',
 			'org.springdoc:springdoc-openapi-ui:1.6.7',
-			'ch.qos.logback:logback-access:1.2.11',
-			'io.micrometer:micrometer-registry-prometheus',
-			'junit:junit:4.13.1',
-			'org.postgresql:postgresql',
-			'org.flywaydb:flyway-core',
-			'org.springframework.boot:spring-boot-starter-validation',
-			"org.zalando:logbook-spring-boot-starter:$logbookStarterVersion",
-			"net.logstash.logback:logstash-logback-encoder:7.0.1",
-			'org.springframework.cloud:spring-cloud-starter-sleuth',
-			"org.springframework.cloud:spring-cloud-sleuth-zipkin:$springCloudSleuthZipkinVersion",
-			'org.mapstruct:mapstruct:1.5.3.Final'
-	)
+            'ch.qos.logback:logback-access:1.2.11',
+            'io.micrometer:micrometer-registry-prometheus',
+            'junit:junit:4.13.1',
+            'org.postgresql:postgresql',
+            'org.flywaydb:flyway-core',
+            'org.springframework.boot:spring-boot-starter-validation',
+            "org.zalando:logbook-spring-boot-starter:$logbookStarterVersion",
+            "net.logstash.logback:logstash-logback-encoder:7.0.1",
+            'org.springframework.cloud:spring-cloud-starter-sleuth',
+            "org.springframework.cloud:spring-cloud-sleuth-zipkin:$springCloudSleuthZipkinVersion",
+            'org.mapstruct:mapstruct:1.5.3.Final',
+    )
 
 	annotationProcessor(
 			'org.projectlombok:lombok:1.18.22',
@@ -60,18 +60,19 @@ dependencies {
 	)
 
 	testImplementation(
-			'org.springframework.boot:spring-boot-starter-test',
-			"io.rest-assured:rest-assured:$restAssuredVersion",
-			"io.rest-assured:json-path:$restAssuredVersion",
-			"io.rest-assured:xml-path:$restAssuredVersion",
-			'org.assertj:assertj-core:3.23.1',
-			"org.testcontainers:testcontainers:$tcVersion",
-			"org.testcontainers:postgresql:$tcVersion",
-			"org.testcontainers:junit-jupiter:$tcVersion",
-			"org.springframework.cloud:spring-cloud-contract-wiremock:$springCloudWiremockVersion",
-			"io.github.classgraph:classgraph:4.8.139"
-
-	)
+            'org.springframework.boot:spring-boot-starter-test',
+            "io.rest-assured:rest-assured:$restAssuredVersion",
+            "io.rest-assured:json-path:$restAssuredVersion",
+            "io.rest-assured:xml-path:$restAssuredVersion",
+            'org.assertj:assertj-core:3.23.1',
+            "org.testcontainers:testcontainers:$tcVersion",
+            "org.testcontainers:postgresql:$tcVersion",
+            "org.testcontainers:junit-jupiter:$tcVersion",
+            "org.springframework.cloud:spring-cloud-contract-wiremock:$springCloudWiremockVersion",
+            "io.github.classgraph:classgraph:4.8.139",
+            'org.yaml:snakeyaml:1.33',
+            'com.github.javafaker:javafaker:1.0.2'
+    )
 }
 dependencyManagement {
 	imports {
