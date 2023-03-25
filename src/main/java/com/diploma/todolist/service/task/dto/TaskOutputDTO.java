@@ -12,7 +12,7 @@ import javax.validation.constraints.PositiveOrZero;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class CreateTaskOutputDTO {
+public class TaskOutputDTO {
     @PositiveOrZero
     private Long id;
     @NotBlank
