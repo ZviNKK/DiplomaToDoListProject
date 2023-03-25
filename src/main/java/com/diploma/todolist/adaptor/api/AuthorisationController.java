@@ -21,12 +21,12 @@ public class AuthorisationController {
     private final AuthorisationService service;
 
     @PostMapping("/registration")
-    public AuthorisationOutputDTO registration(@RequestBody @Valid RegistrationInputDTO registrationInputDTO) {
+    AuthorisationOutputDTO registration(@RequestBody @Valid RegistrationInputDTO registrationInputDTO) {
         return service.registrationNewUser(registrationInputDTO);
     }
 
     @PostMapping
-    public AuthorisationOutputDTO authorisation(@RequestBody @Valid AuthorisationInputDTO authorisationInputDTO) {
+    AuthorisationOutputDTO authorisation(@RequestBody @Valid AuthorisationInputDTO authorisationInputDTO) {
         return service.authorisation(authorisationInputDTO);
     }
 }

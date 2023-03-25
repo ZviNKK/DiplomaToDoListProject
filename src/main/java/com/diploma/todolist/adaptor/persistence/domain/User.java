@@ -3,6 +3,7 @@ package com.diploma.todolist.adaptor.persistence.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -22,4 +23,6 @@ public class User {
     private String phone;
     @Column(name = "password")
     private String password;
+    @OneToMany(mappedBy = "user")
+    private List<Task> tasks;
 }
