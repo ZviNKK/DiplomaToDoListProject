@@ -17,4 +17,6 @@ public class TaskOutputDTO {
     private Long id;
     @NotBlank
     private String title;
+
+    private boolean isCompleted;
 }

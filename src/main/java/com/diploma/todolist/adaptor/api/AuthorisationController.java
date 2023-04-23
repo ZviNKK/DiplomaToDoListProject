@@ -16,7 +16,7 @@ import javax.validation.Valid;
 @RestController
 @Validated
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/authorisation")
+@RequestMapping("/api/v1")
 public class AuthorisationController {
     private final AuthorisationService service;
 
@@ -25,7 +25,7 @@ public class AuthorisationController {
         return service.registrationNewUser(registrationInputDTO);
     }
 
-    @PostMapping
+    @PostMapping("/authorisation")
     AuthorisationOutputDTO authorisation(@RequestBody @Valid AuthorisationInputDTO authorisationInputDTO) {
         return service.authorisation(authorisationInputDTO);
     }
