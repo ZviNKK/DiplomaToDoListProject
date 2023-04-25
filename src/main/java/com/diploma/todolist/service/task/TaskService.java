@@ -12,4 +12,6 @@ public interface TaskService {
     TaskOutputDTO getTaskById(Long taskId);
 
     UserTasksOutputDTO getTasksByUserId(Long userId);
+
+    TaskOutputDTO changeTaskStatus(Long taskId);
 }
