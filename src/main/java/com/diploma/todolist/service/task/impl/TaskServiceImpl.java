@@ -77,4 +77,16 @@ public class TaskServiceImpl implements TaskService {
 
         return new UserTasksOutputDTO(mapper.toOutputTasksList(tasks));
     }
+
+    @Override
+    public TaskOutputDTO changeTaskStatus(Long taskId) {
+        final var task = taskRepository.findById(taskId);
+        if (task.isEmpty()) {
+            log.error("Task not found. Task id: {}", taskId);
+            throw new TaskNotFoundException();
+        }
+        task.get().setCompleted(!task.get().isCompleted());
+        taskRepository.save(task.get());
+        return mapper.toOutputTask(task.get());
+    }
 }
