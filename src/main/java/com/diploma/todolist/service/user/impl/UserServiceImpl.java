@@ -56,7 +56,11 @@ public class UserServiceImpl implements UserService {
     public ChangeEmailOutputDTO changeEmail(Long userId, ChangeEmailInputDTO changeEmailInputDTO) {
         final var newEmail = changeEmailInputDTO.getNewEmail();
         final var user = userRepository.findById(userId);
-        if (!user.isEmpty()) {
+        if (user.isEmpty()) {
+            log.error("User not found. User id: {} Request data: {}", userId, changeEmailInputDTO);
+            throw new UserNotFoundException();
+        }
+        if (!userRepository.findByEmail(newEmail).isEmpty()) {
             log.error("User already exist. User id: {} Request data: {}", userId, changeEmailInputDTO);
             throw new UserAlreadyExistException();
         }
