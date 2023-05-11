@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
             helper.setText("You new password is: " + newPassword);
             javaMailSender.send(message);
 
-            return new ResetPasswordOutputDTO("Success");
+            return new ResetPasswordOutputDTO("success");
         } catch (Exception e) {
             return new ResetPasswordOutputDTO("Failed to reset password: " + e.getMessage());
         }
