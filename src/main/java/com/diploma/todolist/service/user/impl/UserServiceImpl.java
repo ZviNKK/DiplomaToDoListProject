@@ -1,6 +1,7 @@
 package com.diploma.todolist.service.user.impl;
 
 import com.diploma.todolist.adaptor.persistence.UserRepository;
+import com.diploma.todolist.service.exceptions.error_code.bad_request.UserAlreadyExistException;
 import com.diploma.todolist.service.exceptions.error_code.not_found.UserNotFoundException;
 import com.diploma.todolist.service.user.UserService;
 import com.diploma.todolist.service.user.dto.change_email.ChangeEmailInputDTO;
@@ -55,9 +56,9 @@ public class UserServiceImpl implements UserService {
     public ChangeEmailOutputDTO changeEmail(Long userId, ChangeEmailInputDTO changeEmailInputDTO) {
         final var newEmail = changeEmailInputDTO.getNewEmail();
         final var user = userRepository.findById(userId);
-        if (user.isEmpty()) {
-            log.error("User not found. User id: {} Request data: {}", userId, changeEmailInputDTO);
-            throw new UserNotFoundException();
+        if (!user.isEmpty()) {
+            log.error("User already exist. User id: {} Request data: {}", userId, changeEmailInputDTO);
+            throw new UserAlreadyExistException();
         }
         user.get().setEmail(newEmail);
         userRepository.save(user.get());
