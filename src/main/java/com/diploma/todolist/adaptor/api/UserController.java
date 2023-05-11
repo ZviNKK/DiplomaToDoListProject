@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 
 @RestController
 @Validated
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/change-email/{userId}")
-    public ChangeEmailOutputDTO changeEmail(@PathVariable Long userId, @RequestBody ChangeEmailInputDTO changeEmailInputDTO) {
+    public ChangeEmailOutputDTO changeEmail(@PathVariable Long userId, @RequestBody @Valid ChangeEmailInputDTO changeEmailInputDTO) {
         var changeEmailOutputDTO = userService.changeEmail(userId, changeEmailInputDTO);
         return changeEmailOutputDTO;
     }
